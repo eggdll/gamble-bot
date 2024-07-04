@@ -1,3 +1,6 @@
 modules = ["php-8.2"]
+
+run = "php main.php"
+
 [nix]
 channel = "stable-24_05"
