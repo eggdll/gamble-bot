@@ -353,6 +353,26 @@ $discord->on('ready', function (Discord $discord) {
         
                     $message->reply($builder);
                 }
+            } elseif (str_starts_with($actualcmd, "reload-db")) {
+                if ($message->author->id == 1198738857022201877) {
+                    $db->reload();
+
+                    $embed = makeEmbed($discord, "database reload", [], "successfully reloaded", 11867413);    
+                
+                    $builder = MessageBuilder::new()
+                    ->setContent("<@{$message->author->id}>")
+                    ->addEmbed($embed);
+        
+                    $message->reply($builder);
+                } else {
+                    $embed = makeEmbed($discord, "database save", [], "you do not have access to this command", 11867413);    
+                
+                    $builder = MessageBuilder::new()
+                    ->setContent("<@{$message->author->id}>")
+                    ->addEmbed($embed);
+        
+                    $message->reply($builder);
+                }
             } elseif (str_starts_with($actualcmd, "give")) {
                 $mentioned = null;
                 
