@@ -22,6 +22,14 @@ class Database
         file_put_contents(__DIR__.'/localdb.json', json_encode($this->db));
     }
 
+    function reload() {
+        file_put_contents(__DIR__.'/localdb.json', json_encode($this->db));
+
+        if (file_exists(__DIR__.'/localdb.json')) {
+            $this->db = json_decode(file_get_contents(__DIR__.'/localdb.json'), true);
+        }
+    }
+
     function createUser(int $userId) {
         $this->db[$userId] = [
             "userId" => $userId,
