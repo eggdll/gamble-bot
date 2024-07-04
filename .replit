@@ -4,3 +4,8 @@ run = "php main.php"
 
 [nix]
 channel = "stable-24_05"
+
+[[ports]]
+localPort = 8000
+externalPort = 80
+exposeLocalhost = true

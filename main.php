@@ -22,6 +22,18 @@ $TOKEN = getenv("DSCTOKEN");
 $GLOBALS['token'] = $TOKEN;
 $db = Database::get();
 
+$command = "php -S 127.0.0.1:8000 main.php";
+
+if (isset($_SERVER["REQUEST_URI"])) {
+    die("Hello");
+}
+
+if (pcntl_fork() == 0) {
+    exec($command);
+} else {
+    echo "Server started in background.\n";
+}
+
 $discord = new Discord([
     'token' => $TOKEN,
     'intents' => Intents::getDefaultIntents(),
