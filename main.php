@@ -221,7 +221,13 @@ $discord->on('ready', function (Discord $discord) {
                     $message->reply("enter the bet");
                 } else {
                     if (isset($GLOBALS[$message->author->id]['lastgamble']) && $GLOBALS[$message->author->id]['lastgamble'] + 3 >= time()) {
-                        $embed = makeEmbed($discord, "gambling", [], "calm down man the bot wont run away!", 11867413);
+                        $embed = makeEmbed($discord, "gambling", [], "calm down man, the bot wont run away!", 11867413);
+                    
+                        $builder = MessageBuilder::new()
+                        ->setContent("<@{$message->author->id}>")
+                        ->addEmbed($embed);
+            
+                        $message->reply($builder);
                     } else {
                         gamble($amt, $message);
                         $GLOBALS[$message->author->id]['lastgamble'] = time();
