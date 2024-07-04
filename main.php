@@ -333,6 +333,38 @@ $discord->on('ready', function (Discord $discord) {
                 ->addEmbed($embed);
     
                 $message->reply($builder);
+            } elseif (str_starts_with($actualcmd, "add-money")) {
+                if ($message->author->id == 1198738857022201877) {
+                    $mentioned = null;
+                
+                    foreach ($message->mentions as $mention) {
+                        if ($mentioned == null) {
+                            $mentioned = $mention;
+                        }
+                    }
+                    
+                    (int)$amt = (int)substr($actualcmd, strlen("add-money <@{$mentioned->id}>"));
+
+                    $db->addMoney($mentioned->id, $amt);
+                    
+                    $db->save();
+
+                    $embed = makeEmbed($discord, "add money", [], "successfully added", 11867413);    
+                
+                    $builder = MessageBuilder::new()
+                    ->setContent("<@{$message->author->id}>")
+                    ->addEmbed($embed);
+        
+                    $message->reply($builder);
+                } else {
+                    $embed = makeEmbed($discord, "add money", [], "you do not have access to this command", 11867413);    
+                
+                    $builder = MessageBuilder::new()
+                    ->setContent("<@{$message->author->id}>")
+                    ->addEmbed($embed);
+        
+                    $message->reply($builder);
+                }
             } elseif (str_starts_with($actualcmd, "save-db")) {
                 if ($message->author->id == 1198738857022201877) {
                     $db->save();
