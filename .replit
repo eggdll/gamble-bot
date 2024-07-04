@@ -1,0 +1,3 @@
+modules = ["php-8.2"]
+[nix]
+channel = "stable-24_05"
