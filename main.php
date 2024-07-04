@@ -232,7 +232,7 @@ $discord->on('ready', function (Discord $discord) {
                 if ($amt == '') {
                     $message->reply("enter the bet");
                 } else {
-                    if (isset($GLOBALS[$message->author->id]['lastgamble']) && $GLOBALS[$message->author->id]['lastgamble'] + 3 >= time()) {
+                    if (isset($GLOBALS[$message->author->id]['lastgamble']) && $GLOBALS[$message->author->id]['lastgamble'] + 1 >= time()) {
                         $embed = makeEmbed($discord, "gambling", [], "calm down man, the bot wont run away!", 11867413);
                     
                         $builder = MessageBuilder::new()
